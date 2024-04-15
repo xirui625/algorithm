@@ -20,10 +20,8 @@ def logger(func):
     @functools.wraps(func)
     def wrapper(*args, **kw):
         print('主人，我准备开始执行：{} 函数了:'.format(func.__name__))
-
         # 真正执行的是这行。
         func(*args, **kw)
-
         print('主人，我执行完啦。')
     return wrapper
 

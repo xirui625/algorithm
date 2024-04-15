@@ -15,49 +15,20 @@ class ListNode:
         self.val = x
         self.next = None
 
-
 class Solution:
-    def addInList(self, head1, head2):
-        stack1 = []
-        stack2 = []
-        # l1入栈
-        while head1:
-            stack1.append(head1.val)
-            head1 = head1.next
-        while head2:
-            stack2.append(head2.val)
-            head2 = head2.next
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        cur = dummy = ListNode()  # 哨兵节点
+        carry = 0  # 进位
+        while l1 or l2 or carry:  # 有一个不是空节点，或者还有进位，就继续迭代
+            carry += (l1.val if l1 else 0) + (l2.val if l2 else 0)  # 节点值和进位加在一起
+            cur.next = ListNode(carry % 10)  # 每个节点保存一个数位
+            carry //= 10  # 新的进位
+            cur = cur.next  # 下一个节点
+            if l1: l1 = l1.next  # 下一个节点
+            if l2: l2 = l2.next  # 下一个节点
+        return dummy.next  # 哨兵节点的下一个节点就是头节点
 
-        node = pre = None
-        carry = 0
 
-        while stack1 and stack2:
-            num = stack1.pop() + stack2.pop() + carry
-            # 求进位数
-            carry = int(num / 10)
-            tmp = num % 10
-            pre = node
-            node = ListNode(tmp)
-            node.next = pre
-            # head = node
-
-        s = stack1 if stack1 else stack2
-        while s:
-            num = s.pop() + carry
-            carry = int(num / 10)
-            tmp = num % 10
-            pre = node
-            node = ListNode(tmp)
-            node.next = pre
-            # head = node
-
-        if carry == 1:
-            pre = node
-            node = ListNode(carry)
-            node.next = pre
-            # head = node
-        return node
-    
 
 
 # 两数相加

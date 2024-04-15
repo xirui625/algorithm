@@ -13,7 +13,6 @@ class Solution:
         ret = set()
         for item in permutations(ss, len(ss)):
             ret.add("".join(item))
-        print ret
         return list(ret)
 
 

@@ -41,32 +41,33 @@ class Solution:
             return True
         return False
 
-
 class Solution:
     
     def __init__(self):
         self.stackPush = []
         self.stackPop = []
-
+        
     def push_to_pop(self):
         if not self.stackPop:
             while self.stackPush:
                 self.stackPop.append(self.stackPush.pop())
-
-    def push(self, node):
+    
+    def push(self, value):
         self.push_to_pop()
-        self.stackPush.append(node)
-
+        self.stackPush.append(value)
+    
     def pop(self):
+        if not self.stackPush and not self.stackPop:
+            raise Exception("stack is empty")
         self.push_to_pop()
         self.stackPop.pop()
     
     def peek(self):
-       self.push_to_pop()
-       return self.stackPop[-1]
+        self.push_to_pop()
+        return self.stackPop[-1]
     
     def empty(self):
-        self.push_to_pop
+        self.push_to_pop()
         if not self.stackPop:
             return True
         return False

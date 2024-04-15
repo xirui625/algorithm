@@ -13,16 +13,22 @@
 
 # 返回 滑动窗口中的最大值 
 
+from collections import deque
+
+
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         ans = []
         q = deque()  # 双端队列
         for i, x in enumerate(nums):
             # 1. 入
+            # 保证单调递减
             while q and nums[q[-1]] <= x:
                 q.pop()  # 维护 q 的单调性
+            # 队首元素始终是当前窗口的最大值的索引
             q.append(i)  # 入队
             # 2. 出
+            # 检查队首元素的索引是否已经离开了当前窗口
             if i - q[0] >= k:  # 队首已经离开窗口了
                 q.popleft()
             # 3. 记录答案

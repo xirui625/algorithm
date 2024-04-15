@@ -30,4 +30,27 @@ class Solution:
         #             heapq.heappop(heap)
         #             heapq.heappush(heap, (val, key))
         # return [key for val, key in heap]
+
+class Solution:
+    def getKthWord(self, nums, k):
+        if not nums:
+            return
+        counter = collections.Counter(nums)
+        return heapq.nlargest(k, counter.keys(), key=counter.get)
+    
+    def getKthWordTmp(self, nums, k):
+        if not nums:
+            return
+        heap = []
+        counter = collections.Counter(nums)
+        for key, value in counter.items():
+            if len(heap) < k:
+                heapq.heappush(heap, (value, key))
+            else:
+                if value > heap[0][0]:
+                    heapq.heappop(heap)
+                    heapq.heappush(heap, (value, key))
+        return [key for value, key in heap]
+
+
         

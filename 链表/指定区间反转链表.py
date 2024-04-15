@@ -27,7 +27,9 @@ class Solution:
             cur.next = pre
             pre = cur
             cur = next
+        # 区间内的前一个节点与反转后的链表的尾部连接起来了，连接尾
         p0.next.next = cur
+        # 指定区间的前一个节点 p0 的 next 指针重新指向了区间内节点反转后的第一个节点 pre, 连接头
         p0.next = pre
         return dummy.next
 

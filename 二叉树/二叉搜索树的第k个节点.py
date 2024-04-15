@@ -12,6 +12,7 @@ class Solution:
         if not head or k==0:
             return -1
         self.ret = []
+        # 中序遍历
         def helper(root):
             if not root:
                 return

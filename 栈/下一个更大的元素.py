@@ -56,5 +56,14 @@ class Solution:
 #数字 x 的 下一个更大的元素 是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1 。
 
             
-
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        tmp = 2 * nums
+        res = [-1 for _ in tmp]
+        stack = []
+        for i in range(len(tmp)):
+            while stack and tmp[stack[-1]] < tmp[i]:
+                res[stack.pop()] = tmp[i]
+            stack.append(i)
+        return res[:len(nums)]
                 
