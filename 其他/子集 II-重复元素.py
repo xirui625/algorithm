@@ -16,7 +16,7 @@ class Solution(object):
         def dfs(idx,temp):
             if temp not in ans:
                 ans.append(temp[:])
-            for i in range(idx,len(nums)):
+            for i in range(idx, len(nums)):
                 temp.append(nums[i])
                 dfs(i+1,temp)
                 temp.pop()
