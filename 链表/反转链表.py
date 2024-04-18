@@ -47,4 +47,16 @@ class Solution:
             cur = next
         return pre
     
+    
+    def ReverseDoubleList(self, head):
+        if not head:
+            return 
+        pre = None 
+        cur = head
+        while cur:
+            next = cur.next
+            cur.next = pre
+            pre = cur
+            cur = next
+        return pre
 

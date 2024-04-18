@@ -14,14 +14,16 @@ class Solution(object):
         :rtype: List[str]
         """
         res = []
+        # left 代表左括号的剩余数目
+        # right 代表右括号的剩余数目
         def dfs(left, right, cur):
             if left==0 and right==0:
                 res.append(cur)
                 return
             if left < 0 or right <0 or left > right:
                 return
-            dfs(left-1, right, cur + '(')
-            dfs(left, right-1, cur + ')')
+            dfs(left-1, right, cur + '(') # 减少一个左括号
+            dfs(left, right-1, cur + ')') # 减少一个右括号
 
         dfs(n, n, '')
         return res

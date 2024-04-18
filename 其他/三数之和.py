@@ -56,3 +56,28 @@ class Solution(object):
                     if dif < i or dif > j:
                         ret.append([i, j, dif])
         return ret
+    
+    
+    
+    
+    
+    
+class Solution(object):
+    def threeSum(self, nums):
+        if not nums:
+            return
+        ret = []
+        nums_times = collections.Counter(nums)
+        if 0 in nums_times and nums_times[0] >= 3:
+            ret.append([0, 0, 0])
+        n = list(filter(lambda a: a<0, nums_times))
+        p = list(filter(lambda a: a>=0, nums_times))
+        for i in n:
+            for j in p:
+                dif = 0 -i - j
+                if dif in nums_times:
+                    if dif in (i, j) and nums_times[dif] >= 2:
+                        ret.append([i, j, dif])
+                    if dif < i or dif > j:
+                        ret.append([i, j, dif])
+        return ret

@@ -14,27 +14,6 @@
 # fx = f[x-arr_i] +1
 import sys
 
-
-# class Solution:
-#     def minMoney(self , arr , aim ):
-#         # dp[i]代表给定钱数为i的时候最少货币数就是凑成i元钱，需要dp[i]张arr中面值纸币
-#         # 没办法兑换arr[i]dp[i] = dp[i]
-#         # 可以dp[i] = dp[i - arr[i]] + 1
-#         # dp[i] = min(dp[i], dp[i - a[j]])
-#         dp = [0 for i in range(aim + 1)]
-#         for i in range(1, aim + 1):
-#             cost = float('inf')
-#             for c in aim:
-#                 if i - c >= 0:
-#                     cost = min(cost, dp[i - c] + 1)
-#                 dp[i] = cost
-#         if dp[aim] == float('inf'):
-#             return -1
-#         else:
-#             return dp[aim]
-#         # write code here
-
-
 class Solution:
     def coinChange(self, coins, amount) -> int:
         m = len(coins)

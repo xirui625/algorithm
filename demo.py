@@ -20,7 +20,7 @@
 #     if j in (0, -1):
 #         print(111)
 # import threading
-import asyncio
+# import asyncio
 
 # async def hello():
 #     print('Hello world! (%s)' % threading.currentThread())
@@ -33,16 +33,29 @@ import asyncio
 # loop.close()
     
     
-async def async_generator():
-    for i in range(5):
-        await asyncio.sleep(1)
-        yield i
+# async def async_generator():
+#     for i in range(5):
+#         await asyncio.sleep(1)
+#         yield i
 
-async def main():
-    async for item in async_generator():
-        print(item)
+# async def main():
+#     async for item in async_generator():
+#         print(item)
 
 
-asyncio.run(main())
+# asyncio.run(main())
+class Dog:
+    def __init__(self) -> None:
+        pass
+
+    def __run(self):
+        print('Dog')
     
 
+class MiDog(Dog):
+    def __init__(self) -> None:
+        super().__init__()
+    
+    def __run(self):
+        print('MiDog')
+        
