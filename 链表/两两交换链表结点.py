@@ -32,16 +32,25 @@ class Solution:
             tmp.next = ListNode(stack.pop())
             tmp = tmp.next
         return new_h.next
-        # stack = []
-        # cur = newHead = ListNode(0)
-        # while head:
-        #     stack.append(head.val)
-        #     if len(stack) == 2:
-        #         while stack:
-        #             cur.next = ListNode(stack.pop())
-        #             cur = cur.next
-        #     head = head.next
-        # if stack:
-        #     cur.next = ListNode(stack.pop())
-        #     cur = cur.next
-        # return newHead.next
+
+
+class Solution:
+    def swapLinkedPair(self , head ):
+        if not head:
+            return 
+        stack = []
+        new_head = tmp = ListNode(0)
+        cur = head
+        while cur:
+            stack.append(cur.val)
+            if len(stack) == 2:
+                while stack:
+                    node = ListNode(stack.pop())
+                    tmp.next = node
+                    tmp = tmp.next
+            cur = cur.next
+        while stack:
+            node = ListNode(stack.pop())
+            tmp.next = node
+            tmp = tmp.next
+        return new_head.next

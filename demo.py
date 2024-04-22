@@ -44,18 +44,5 @@
 
 
 # asyncio.run(main())
-class Dog:
-    def __init__(self) -> None:
-        pass
 
-    def __run(self):
-        print('Dog')
-    
-
-class MiDog(Dog):
-    def __init__(self) -> None:
-        super().__init__()
-    
-    def __run(self):
-        print('MiDog')
         

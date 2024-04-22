@@ -24,6 +24,5 @@ class Solution(object):
                 return
             dfs(left-1, right, cur + '(') # 减少一个左括号
             dfs(left, right-1, cur + ')') # 减少一个右括号
-
         dfs(n, n, '')
         return res

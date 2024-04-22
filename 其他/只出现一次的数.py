@@ -13,5 +13,5 @@ class Solution(object):
         """
         res = 0
         for i in nums:
-            res = res ^ i
+            res = res ^ i 
         return res
