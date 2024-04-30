@@ -34,6 +34,7 @@ class Solution:
                 return
 
             for i in range(idx, n):
+                #如果当前索引 i 大于 idx，且当前候选数字与上一个候选数字相同（即重复数字），则跳过当前候选数字，以避免重复组合
                 if i > idx and candidates[i] == candidates[i - 1]:
                     continue
                 path.append(candidates[i])

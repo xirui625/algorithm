@@ -25,7 +25,3 @@ class Soultion:
             max_length = max(max_length, i-pre+1)
         return max_length
 
-if __name__ == '__main__':
-    nums = [0,1,0,1,1,0]
-    s = Soultion()
-    print s.solution(nums, 1)

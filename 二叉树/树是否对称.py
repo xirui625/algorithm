@@ -5,7 +5,7 @@
 # @File    : 树是否对称.py
 # @Software: PyCharm
 
-class Solurion:
+class Solution:
     def isSymmetric(self, root):
         if not root:
             return True

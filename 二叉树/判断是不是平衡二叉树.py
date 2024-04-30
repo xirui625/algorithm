@@ -6,12 +6,12 @@
 # @Software: PyCharm
 
 class Solution:
-    def IsBalanced_Solution(self, pRoot):
-        if not pRoot:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if not root:
             return True
-        return abs(self.helper(pRoot.left) - self.helper(pRoot.right)) < 2 and self.IsBalanced_Solution(
-            pRoot.left) and self.IsBalanced_Solution(pRoot.right)
-
+        return abs(self.helper(root.left) - self.helper(root.right)) < 2 and self.isBalanced(
+            root.left) and self.isBalanced(root.right)
+            
     def helper(self, root):
         # 获取二叉树最大深度
         if not root:
