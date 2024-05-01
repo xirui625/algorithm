@@ -18,9 +18,6 @@ class Solution(object):
         if not nums:
             return
         n = len(nums)
-        # ret = []
-        # for item in permutations(nums, len(nums)):
-        #     print item
         path, res = [], []
         def helper(nums):
             if len(path) == n:
