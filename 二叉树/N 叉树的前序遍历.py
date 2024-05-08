@@ -9,3 +9,14 @@
 '''
 
 
+class Solution:
+    def preorder(self, root):
+        ans = []
+        def dfs(node) -> None:
+            if node is None:
+                return
+            ans.append(node.val)
+            for c in node.children:
+                dfs(c)
+        dfs(root)
+        return ans

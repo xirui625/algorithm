@@ -4,19 +4,8 @@
 # @Author  : yangguoli
 # @File    : 字符串排列.py
 # @Software: PyCharm
-from itertools import combinations, permutations
-
 class Solution:
-    def Permutation1(self, ss):
-        if not ss:
-            return
-        ret = set()
-        for item in permutations(ss, len(ss)):
-            ret.add("".join(item))
-        return list(ret)
-
-
-    def permutation2(self, s):
+    def permutation(self, s):
         """
         :type s: str
         :rtype: List[str]

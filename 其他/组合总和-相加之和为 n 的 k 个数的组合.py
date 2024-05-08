@@ -30,7 +30,7 @@ class Solution:
                 t.append(j)
                 dfs(j + 1, s - j)
                 t.pop()
-
+        # 结果列表 ans 和临时组合 t
         ans = []
         t = []
         dfs(1, n)

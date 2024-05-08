@@ -20,6 +20,11 @@ class Solution:
         :type version1: str
         :type version2: str
         :rtype: int
+        首先将两个字符串版本号根据.划分，并将每位修订号转换为整数，
+        这样自动就去除了前导0带来的影响，
+        然后按照最大数组长度同步循环两拆分好后的修订好，
+        如果下标超了就意味着这个版本号在这位默认0，
+        最后只需要比较哪个修订号更大即可
         """
         vers1 = list(map(lambda x: int(x), version1.split(".")))
         vers2 = list(map(lambda x: int(x), version2.split(".")))

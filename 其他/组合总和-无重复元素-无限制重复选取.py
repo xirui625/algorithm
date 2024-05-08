@@ -22,20 +22,21 @@ class Solution(object):
         # 用于存储所有符合条件的组合
         res = []
         n = len(candidates)
-
+        # idx 表示当前处理的候选数组的起始索引，path 表示当前正在构建的组合，t 表示当前目标值
         def helper(idx, path, t):
 
             if t == 0:
                 res.append(path[:])
                 return
-
+            # 如果当前目标值 t 小于 0，说明当前路径不符合条件，直接返回，结束当前分支的搜索。
             if t < 0:
                 return
 
             for i in range(idx, n):
                 path.append(candidates[i])
+                # 递归调用 helper 函数，更新目标值为 t - candidates[i]，并将索引更新为 i，表示下一个递归调用时可以继续使用当前候选数字
                 helper(i, path, t - candidates[i])
+                # 在递归调用返回后，将添加的候选数字从组合 path 中移除，以便尝试其他组合。
                 path.pop()
-
         helper(0, [], target)
         return res

@@ -19,8 +19,13 @@ class Solution(object):
         """
         if len(s) < k:
             return 0
+        # 找到字符串 s 中出现次数最少的字符 c
         c = min(set(s), key=s.count)
+        # 如果最少出现次数的字符 c 在字符串 s 中出现的次数大于等于 k 次，
+        # 则说明整个字符串 s 就是满足条件的最长子串，直接返回字符串 s 的长度 len(s)
         if s.count(c) >= k:
             return len(s)
         else:
+            # 递归地处理字符串 s 中去除掉字符 c 的每个子串，并找到这些子串中满足条件的最长子串的长度。
+            # 具体做法是通过 s.split(c) 来将字符串 s 按照字符 c 进行拆分，得到多个子串，然后对每个子串递归调用 self.longestSubstring(t, k) 来找到满足条件的最长子串的长度。
             return max(self.longestSubstring(t, k) for t in s.split(c))

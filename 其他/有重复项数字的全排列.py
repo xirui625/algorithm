@@ -4,7 +4,7 @@
 # @Author  : yangguoli
 # @File    : 有重复项数字的全排列.py
 # @Software: PyCharm
-class Solution(object):
+class Solution:
     def permuteUnique(self, nums):
         """
         :type nums: List[int]
