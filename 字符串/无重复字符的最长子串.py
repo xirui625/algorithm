@@ -23,7 +23,8 @@ class Solution(object):
                     max_len = len(ret)
                     max_str = ''.join(ret)
             else:
-                #如果 i 已经在 ret 中，说明出现了重复字符，需要调整 ret 列表，直到 ret 中不再包含重复字符为止。这里使用了一个 while 循环，不断地从 ret 列表的开头弹出字符，直到 i 不再在 ret 中，然后再将 i 加入 ret
+                #如果 i 已经在 ret 中，说明出现了重复字符，需要调整 ret 列表，
+                # 直到 ret 中不再包含重复字符为止。这里使用了一个 while 循环，不断地从 ret 列表的开头弹出字符，直到 i 不再在 ret 中，然后再将 i 加入 ret
                 while i in ret:
                     ret.pop(0)
                 ret.append(i)

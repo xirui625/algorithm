@@ -5,20 +5,6 @@
 # @File    : zuhe zongshu.py
 # @Software: PyCharm
 
-
-
-class Solution(object):
-    def subsets(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        res = []
-        for i in range(len(nums)+1):
-            for tmp in itertools.combinations(nums, i):
-                res.append(tmp)
-        return res
-
 class Solution:
     def combinationSum2(self, candidates, target):
         candidates.sort()
