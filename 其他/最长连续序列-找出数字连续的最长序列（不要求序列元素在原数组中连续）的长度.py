@@ -22,14 +22,28 @@
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        if not nums : return 0
-        nums=list(set(nums))
+        # 如果输入列表为空，返回 0
+        if not nums:
+            return 0
+        
+        # 使用 set 去重，然后转换回列表
+        nums = list(set(nums))
+        # 对列表进行排序
         nums.sort()
-        maxlen=1
-        start=0
-        for end in range(1,len(nums)):
-            if nums[end]-nums[end-1]==1:
-                maxlen=max(maxlen,end-start+1)
+        
+        maxlen = 1  # 初始化最长连续序列的长度
+        start = 0  # 初始化连续序列的起始位置
+        
+        # 遍历排序后的列表
+        for end in range(1, len(nums)):
+            # 如果当前元素与前一个元素之差为 1，表示连续
+            if nums[end] - nums[end - 1] == 1:
+                # 更新最长连续序列的长度
+                maxlen = max(maxlen, end - start + 1)
             else:
-                start=end
+                # 更新连续序列的起始位置
+                start = end
+        
+        # 返回最长连续序列的长度
         return maxlen
+

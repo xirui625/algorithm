@@ -10,7 +10,7 @@
 
 请你找出符合题意的 最短 子数组，并输出它的长度。
 '''
-class Solution(object):
+class Solution:
     def findUnsortedSubarray(self, nums):
         """
         :type nums: List[int]

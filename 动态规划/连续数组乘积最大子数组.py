@@ -22,14 +22,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        #首先进行基本的判断，如果数组 nums 为空，则直接返回 0。
         if not nums:
             return 0
+        # 初始化三个变量 mi、ma 和 res，分别表示当前位置结尾的最小乘积、最大乘积和最终结果初始化数组的第一个元素 nums[0]
         mi = ma = res = nums[0]
         n = len(nums)
+        #遍历数组 nums，从第二个元素开始，对于每个位置 i：
         for i in range(1, n):
+            # 如果为负数
             if nums[i] <0:
+                # 交换 mi 和 ma 的值
                 mi, ma = ma, mi
+            #更新最小乘积和最大乘积。最小乘积 mi 的更新规则是当前元素 nums[i] 与当前元素乘以最小乘积 mi 的较小值；
+            #最大乘积 ma 的更新规则是当前元素 nums[i] 与当前元素乘以最大乘积 ma 的较大值。
             mi = min(mi*nums[i], nums[i])
             ma = max(ma*nums[i], nums[i])
+            #更新最终结果 res，取最大乘积 ma 和当前结果 res 中的较大值。
             res = max(res, ma)
         return res
