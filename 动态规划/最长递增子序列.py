@@ -16,14 +16,33 @@
 # 只要前面某个数小于当前数，则要么长度在之前基础上加1，
 # 要么保持不变，取两者中的较大者。即dp[i]=Math.max(dp[i],dp[j]+1)
 
+from typing import List
+
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         if not nums:
             return 0
-        # dp[i]表示以下标i结尾的最长上升子序列的长度。
-        dp = [1 for i in range(len(nums))]
+        
+        # dp[i] 表示以下标 i 结尾的最长上升子序列的长度
+        dp = [1] * len(nums)
+        
+        # 遍历数组，计算最长上升子序列的长度
         for i in range(1, len(nums)):
             for j in range(i):
                 if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-        return max(dp)
+                    dp[i] = max(dp[i], dp[j] + 1)  # 如果 nums[i] > nums[j]，更新 dp[i]
+        
+        return max(dp)  # 返回 dp 数组中的最大值作为最终的结果
+
+# 测试用例
+def test_lengthOfLIS():
+    solution = Solution()
+    assert solution.lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]) == 4, "测试用例1失败"
+    assert solution.lengthOfLIS([0, 1, 0, 3, 2, 3]) == 4, "测试用例2失败"
+    assert solution.lengthOfLIS([7, 7, 7, 7, 7, 7, 7]) == 1, "测试用例3失败"
+    assert solution.lengthOfLIS([4, 10, 4, 3, 8, 9]) == 3, "测试用例4失败"
+    assert solution.lengthOfLIS([1, 3, 6, 7, 9, 4, 10, 5, 6]) == 6, "测试用例5失败"
+    print("所有测试用例通过!")
+
+# 执行测试用例
+test_lengthOfLIS()

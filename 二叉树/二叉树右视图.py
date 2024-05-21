@@ -12,7 +12,7 @@ class Solution:
     def __init__(self):
         self.res = []
 
-    def solve(self , xianxu , zhongxu ):
+    def solve(self , xianxu , zhongxu):
         if not xianxu or not zhongxu:
             return
         #构建二叉树

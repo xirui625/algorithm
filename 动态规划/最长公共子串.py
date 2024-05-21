@@ -26,33 +26,8 @@ class Solution:
         
         # 返回 dp[m][n]，即为最长公共子串
         return dp[m][n]
-        # if not str1 or not str2:
-        #     return ''
-        # #获取DP
-        # dp = [[0 for i in range(len(str2) + 1)] for j in range(len(str1) + 1)] # 代表str1在i位置，str2在j位置最长公共子串
-        # maxLength = 0
-        # end = 0
-        # for i in range(len(str1)):
-        #     for j in range(len(str2)):
-        #         if str1[i] == str2[j]:
-        #             if i == 0 or j == 0:
-        #                 dp[i][j] = 1
-        #             else:
-        #                 dp[i][j] = dp[i - 1][j - 1] + 1
-        #             if dp[i][j] > maxLength:
-        #                 maxLength = dp[i][j]
-        #                 end = i
-        # return str1[end-maxLength+1:end+1]
-
-    # def LCS2(self , str1 , str2 ):
-    #     res = ''
-    #     left = 0
-    #     for i in range(len(str1) + 1):
-    #         if str1[left:i+1] in str2:
-    #             res = str1[left:i+1]
-    #         else:
-    #             left += 1
-    #     return res
+    
+    
     def LCS2(self, str1, str2):
         # 初始化结果字符串 res 为空
         res = ''

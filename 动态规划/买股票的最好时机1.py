@@ -12,39 +12,7 @@
 # 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
 
 class Solution:
-    # 假设你有一个数组prices，长度为n，其中prices[i]
-    # 是股票在第i天的价格，请根据这个价格数组，返回买卖股票能获得的最大收益
-    # 1.
-    # 你可以买入一次股票和卖出一次股票，并非每天都可以买入或卖出一次，总共只能买入和卖出一次，且买入必须在卖出的前面的某一天
-    # 2.
-    # 如果不能获取到任何利润，请返回0
-    # 3.
-    # 假设买入卖出均无手续费
-    def maxProfit(self , prices ):
-        # db[i][j] 代表第i天的持股状态j：j 为0 不持股 为1 持股
-        dp = [[0]*2] * (len(prices)+1)
-        dp[0][0] = 0
-        dp[0][1] = -prices[0]
-        for i in range(len(prices)):
-            # dp[i][0]：规定了今天不持股，有以下两种情况：
-            # 昨天不持股，今天什么都不做；
-            # 昨天持股，今天卖出股票（现金数增加）
-            dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-            # dp[i][1]：规定了今天持股，有以下两种情况：
-            # 昨天持股，今天什么都不做（现金数与昨天一样）；
-            # 昨天不持股，今天买入股票（注意：只允许交易一次，因此手上的现金数就是当天的股价的相反数）
-            dp[i][1] = max(dp[i-1][1], -prices[i])
-        return dp[len(prices)-1][0]
-
-    def maxProfit1(self, prices):
-        # write code here
-        res = 0
-        for i in range(len(prices)):
-            for j in range(i + 1, len(prices)):
-                res = max(res, prices[j] - prices[i])
-        return res
-
-    def maxProfit2(self, prices):
+    def maxProfit(self, prices):
         # 1、使用变量记录历史最低价格
         # minprice
         # 2、则在第
