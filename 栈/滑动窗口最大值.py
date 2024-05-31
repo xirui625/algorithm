@@ -17,7 +17,9 @@ from collections import deque
 
 
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+    def maxSlidingWindow(self, nums, k):
+        if k >= len(nums):
+            return [max(nums)] 
         ans = []
         q = deque()  # 双端队列
         for i, x in enumerate(nums):
@@ -36,3 +38,9 @@ class Solution:
                 # 由于队首到队尾单调递减，所以窗口最大值就是队首
                 ans.append(nums[q[0]])
         return ans
+
+
+nums = [1, 3, -1, -3, 5, 3, 6, 7]
+n = 12
+so = Solution()
+print(so.maxSlidingWindow(nums, n))
