@@ -44,10 +44,16 @@ class ListNode:
 #         return newHead
 class Solution:
     def deleteNode(self, head: ListNode, val: int) -> ListNode:
-        if head.val == val: return head.next
-        pre, cur = head, head.next
+        if head.val == val:
+            return head.next  # 如果要删除的节点是头节点，直接返回头节点的下一个节点
+
+        pre, cur = head, head.next  # 初始化前驱节点 pre 和当前节点 cur
         while cur and cur.val != val:
-            pre, cur = cur, cur.next
-        if cur: pre.next = cur.next
-        return head
+            pre, cur = cur, cur.next  # 遍历链表，找到值为 val 的节点或者到达链表尾部
+
+        if cur:  # 如果找到了值为 val 的节点
+            pre.next = cur.next  # 删除该节点，即将前驱节点 pre 的 next 指针指向当前节点 cur 的下一个节点
+
+        return head  # 返回头节点
+
 

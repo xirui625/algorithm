@@ -58,12 +58,15 @@ class Solution:
             
 class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
-        tmp = 2 * nums
-        res = [-1 for _ in tmp]
-        stack = []
-        for i in range(len(tmp)):
+        tmp = 2 * nums # 将原数组nums复制一次，形成一个新的数组tmp，使得它的长度为原数组的两倍
+        res = [-1 for _ in tmp] # 初始化结果数组res，长度与tmp相同，所有元素初始化为-1
+        stack = [] # 初始化一个空栈，用于存储索引
+        for i in range(len(tmp)): # 遍历tmp数组的每个元素
+            # 当栈不为空且当前元素tmp[i]大于栈顶索引对应的元素tmp[stack[-1]]时
             while stack and tmp[stack[-1]] < tmp[i]:
+                # 将当前元素tmp[i]赋值给res中对应栈顶索引位置
                 res[stack.pop()] = tmp[i]
+            # 将当前索引i压入栈中
             stack.append(i)
-        return res[:len(nums)]
+        return res[:len(nums)] # 返回结果数组res的前len(nums)个元素，即原数组长度的部分
                 

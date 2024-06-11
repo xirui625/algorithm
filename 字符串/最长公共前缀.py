@@ -9,26 +9,24 @@
 
 
 class Solution:
-    def longestCommonPrefix(self , strs ):
+    def longestCommonPrefix(self, strs):
         list_len = len(strs)
+        
+        # 如果列表为空或者列表中有空字符串，则直接返回空字符串
         if list_len == 0 or strs == '':
             return ""
-        new = strs[0]
+        
+        new = strs[0]  # 初始化前缀为第一个字符串
+        
+        # 遍历字符串列表中的每一个字符串
         for i in range(1, list_len):
+            # 使用 while 循环，直到当前字符串以 new 开头
             while (strs[i].find(new) != 0):
-                new = new[:-1]
-        return new
+                new = new[:-1]  # 如果不是以 new 开头，则减少 new 的长度
+        
+        return new  # 返回最长公共前缀
+
     
-# if __name__ == '__main__':
-#     s = Solution()
-#     print(s.longestCommonPrefix(["abca","abc","abca","abc","abcc"]))
-class Solution:
-    def longestCommonPrefix(self , strs ):
-        length = len(strs)
-        if not length:
-            return ''
-        prefix = strs[0]
-        for i in range(1, length):
-            while (strs[i].find(prefix) != 0):
-                prefix = prefix[:-1]
-        return prefix
+if __name__ == '__main__':
+    s = Solution()
+    print(s.longestCommonPrefix(["abca","abc","abca","abc","abcc"]))

@@ -12,44 +12,31 @@ class ListNode:
 
 
 class Solution:
-    def oddEvenList(self , head ):
-        nodeList = []
-        oddList = []
-        evenList = []
-        if not head:
+    def oddEvenList(self, head):
+        if not head or not head.next:
             return head
 
+        # 分别用于存放奇数位置和偶数位置的节点值
+        oddList = []
+        evenList = []
+
+        # 遍历链表，将节点值分别放入奇数列表和偶数列表
+        index = 1
         while head:
-            nodeList.append(head.val)
-            head = head.next
-        for index in range(len(nodeList)):
-            if index % 2 == 0:
-                oddList.append(nodeList[index])
+            if index % 2 != 0:
+                oddList.append(head.val)
             else:
-                evenList.append(nodeList[index])
+                evenList.append(head.val)
+            head = head.next
+            index += 1
+
+        # 合并奇数列表和偶数列表
         result = oddList + evenList
-        cur = head = ListNode(0)
+
+        # 构建新的链表
+        dummy = cur = ListNode(0)
         for val in result:
             cur.next = ListNode(val)
             cur = cur.next
-        return head.next
 
-    # newHead1 = ListNode(0)
-        # cur1 = newHead1
-        # tail = None
-        # newHead2 = ListNode(0)
-        # cur2 = newHead2
-        # for index, node in enumerate(stack1):
-        #     if index % 2 == 0:
-        #         cur1.next = node
-        #         cur1 = cur1.next
-        #         tail = cur1
-        #     else:
-        #         cur2.next = node
-        #         cur2 = cur2.next
-        # tail.next = newHead2.next
-        # return newHead1.next
-
-
-
-
+        return dummy.next

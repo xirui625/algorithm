@@ -20,21 +20,26 @@
 # 调用深度优先搜索函数 dfs(0)，从字符串的起始位置开始搜索可能的分割方案。
 # 返回结果列表 ans，其中存储了所有可能的分割方案。
 
+from typing import List  # 导入List类型用于类型注解
+
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        ans = []
-        path = []
-        n = len(s)
+        ans = []  # 存储最终结果
+        path = []  # 存储当前的回文子串分割路径
+        n = len(s)  # 字符串的长度
+
         def dfs(i: int) -> None:
-            if i == n:
-                ans.append(path.copy())  # 复制 path
+            if i == n:  # 如果索引 i 到达字符串末尾
+                ans.append(path.copy())  # 复制当前路径并添加到结果中
                 return
-            for j in range(i, n):  # 枚举子串的结束位置
-                t = s[i: j + 1]
-                if t == t[::-1]:  # 判断是否回文
-                    path.append(t)
-                    dfs(j + 1)
-                    path.pop()  # 恢复现场
-        dfs(0)
-        return ans
+            for j in range(i, n):  # 枚举子串的结束位置 j
+                t = s[i: j + 1]  # 取子串 s[i:j+1]
+                if t == t[::-1]:  # 判断子串是否为回文
+                    path.append(t)  # 如果是回文，将子串添加到当前路径中
+                    dfs(j + 1)  # 递归处理子串的剩余部分
+                    path.pop()  # 回溯，恢复现场
+
+        dfs(0)  # 从字符串的起始位置开始进行深度优先搜索
+        return ans  # 返回所有可能的回文分割结果
+
 

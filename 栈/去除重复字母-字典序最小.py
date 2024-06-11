@@ -51,13 +51,14 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        stack = []
-        remain_counter = collections.Counter(s)
+        stack = [] # 初始化一个空栈，用于存储最终结果字符
+        remain_counter = collections.Counter(s) # 统计字符串s中每个字符的出现次数
 
-        for c in s:
-            if c not in stack:
+        for c in s: # 遍历字符串s中的每个字符
+            if c not in stack: # 如果字符c不在栈中
+                # 当栈不为空且当前字符c小于栈顶字符且栈顶字符在后续还会出现时
                 while stack and c < stack[-1] and  remain_counter[stack[-1]] > 0:
-                    stack.pop()
-                stack.append(c)
-            remain_counter[c] -= 1
-        return ''.join(stack)
+                    stack.pop()  # 从栈中弹出栈顶字符
+                stack.append(c) # 将当前字符c压入栈中
+            remain_counter[c] -= 1 # 当前字符c的剩余计数减1
+        return ''.join(stack) # 将栈中的字符连接成一个字符串并返回

@@ -14,53 +14,40 @@
 # 困难程度，先忽略
 
 class Solution:
-
     def __init__(self):
-        self.stack = []
-        # self.pre = None
-        # self.next = None
+        self.stack = []  # 初始化一个空栈，用于存储待反转的节点
 
-    def reverseKGroup2(self, head, k):
-        if not head:
-            return
-        cur = head
-        while cur:
-            self.stack.append(cur.val)
-            cur = cur.next
-        res = [self.stack[i:i + k] for i in range(0, len(self.stack), k)]
-        result = []
-        for item in res:
-            if len(item) == k:
-                result.extend(item[::-1])
-            else:
-                result.extend(item)
-        cur = new_head = ListNode(result[0])
-        for item in result:
-            cur.next = ListNode(item)
-            cur = cur.next
-        return new_head
-
-    def reverseKGroup(self , head , k):
+    def reverseKGroup(self, head, k):
         if k < 2:
-            return head
-        newHeads = cur = head
-        pre = None
-        while cur:
-            next = cur.next
-            self.stack.append(cur)
-            if len(self.stack) == k:
-                pre = self.help(pre, next)
-                newHeads = cur if newHeads == head else newHeads
-            cur = next
-        return newHeads
+            return head  # 如果 k 小于 2，直接返回头节点，不需要反转
 
-    def help(self, left, right):
-        cur = self.stack.pop()
+        newHeads = cur = head  # 初始化指向新反转链表头节点和当前节点的指针
+        pre = None  # 初始化前一个反转段的尾节点
+
+        while cur:
+            next_node = cur.next  # 保存当前节点的下一个节点
+
+            self.stack.append(cur)  # 将当前节点压入栈中，准备反转
+
+            if len(self.stack) == k:  # 如果栈中节点数达到 k，进行反转操作
+                pre = self.reverse(pre, next_node)  # 反转当前段，并与前一段连接
+                newHeads = cur if newHeads == head else newHeads  # 更新新链表头节点
+
+            cur = next_node  # 移动到下一个节点
+
+        return newHeads  # 返回新链表的头节点
+
+    def reverse(self, left, right):
+        cur = self.stack.pop()  # 弹出栈顶节点作为新的反转段头节点
+
         if left:
-            left.next = cur
+            left.next = cur  # 将前一段的尾节点连接到新的反转段头节点
+
         while self.stack:
-            next = self.stack.pop()
-            cur.next = next
-            cur = next
-        cur.next = right
-        return cur
+            next_node = self.stack.pop()  # 从栈中依次弹出节点，进行反转操作
+            cur.next = next_node  # 当前节点指向下一个节点
+            cur = next_node  # 移动当前节点指针
+
+        cur.next = right  # 将反转段的尾节点连接到下一段
+
+        return cur  # 返回反转段的尾节点

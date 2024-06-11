@@ -18,6 +18,7 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
+        # 映射每个数字到相应的字母列表
         phone = {'2': ['a', 'b', 'c'],
                  '3': ['d', 'e', 'f'],
                  '4': ['g', 'h', 'i'],
@@ -27,23 +28,19 @@ class Solution(object):
                  '8': ['t', 'u', 'v'],
                  '9': ['w', 'x', 'y', 'z']}
         
-        # combination，表示当前正在构建的字母组合，和next_digits，表示待处理的剩余数字串
+        # 回溯函数：combination 表示当前构建的字母组合，next_digits 表示待处理的剩余数字串
         def backtrack(combination, next_digits):
-            # if there is no more digits to check
-            if len(next_digits) == 0:
-                # the combination is done
-                output.append(combination)
-            # if there are still digits to check
+            if len(next_digits) == 0:  # 如果没有更多的数字要处理
+                output.append(combination)  # 将当前的组合加入到输出列表中
             else:
-                # iterate over all letters which map 
-                # the next available digit
+                # 遍历当前数字对应的所有字母
                 for letter in phone[next_digits[0]]:
-                    # append the current letter to the combination
-                    # and proceed to the next digits
+                    # 将当前字母加入到组合中，并继续处理剩余的数字
                     backtrack(combination + letter, next_digits[1:])
                     
-        output = []
-        if digits:
-            backtrack("", digits)
-        return output
+        output = []  # 初始化输出列表
+        if digits:  # 如果输入的数字串不为空
+            backtrack("", digits)  # 从空组合和整个数字串开始回溯
+        return output  # 返回所有可能的字母组合
+
         

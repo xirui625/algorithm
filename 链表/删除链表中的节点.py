@@ -31,7 +31,17 @@
 #         self.val = x
 #         self.next = None
 
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 class Solution:
     def deleteNode(self, node):
+        if not node or not node.next:
+            return
+        
+        # 将当前节点的值修改为下一个节点的值
         node.val = node.next.val
+        # 删除下一个节点
         node.next = node.next.next
