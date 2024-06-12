@@ -41,17 +41,25 @@ class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         n = len(intervals)
         if n == 0: return 0
+        
+        # 初始化动态规划数组，dp[i] 表示以 intervals[i] 为结尾的不重叠区间的最大数量
         dp = [1] * n
         ans = 1
+        
+        # 按照区间的起始时间进行排序
         intervals.sort(key=lambda a: a[0])
 
+        # 遍历所有区间
         for i in range(len(intervals)):
+            # 向前遍历，查找与当前区间不重叠的区间
             for j in range(i - 1, -1, -1):
                 if intervals[i][0] >= intervals[j][1]:
                     dp[i] = max(dp[i], dp[j] + 1)
-                    break # 由于是按照开始时间排序的, 因此可以剪枝
-                
+                    break  # 因为 intervals 按照起始时间排序，所以可以剪枝
+
+        # 返回移除的区间数量，即 n 减去最大的不重叠区间数量
         return n - max(dp)
+
 
 
 

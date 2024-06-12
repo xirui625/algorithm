@@ -22,13 +22,15 @@ class Solution:
     # remain_counter[c] -= 1：将当前字符 c 在剩余字符计数器 remain_counter 中的数量减 1，表示已经使用了一个 c。
     # return ''.join(stack)：返回栈 stack 中的字符拼接成的字符串，这就是构建的字典序最小的子序列。
     def smallestSubsequence(self, s: str) -> str:
-        stack = []
-        remain_counter = collections.Counter(s)
+        stack = []  # 用于存放结果的栈
+        remain_counter = collections.Counter(s)  # 统计每个字符剩余的数量
 
         for c in s:
             if c not in stack:
-                while stack and c < stack[-1] and  remain_counter[stack[-1]] > 0:
+                # 如果当前字符 c 没有在栈中，并且栈顶元素大于当前元素 c，且栈顶元素在后续还会出现，则弹出栈顶元素
+                while stack and c < stack[-1] and remain_counter[stack[-1]] > 0:
                     stack.pop()
-                stack.append(c)
-            remain_counter[c] -= 1
-        return ''.join(stack)
+                stack.append(c)  # 将当前字符 c 入栈
+            remain_counter[c] -= 1  # 字符 c 的剩余数量减 1
+        
+        return ''.join(stack)  # 返回栈中的元素组成的字符串

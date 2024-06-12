@@ -21,27 +21,33 @@ class Solution(object):
         :type text1: str
         :type text2: str
         :rtype: int
-        dp[i][j] 表示text1[0:i] 和 text_2[0:j] 最长公共子序列
+        dp[i][j] 表示text1[0:i] 和 text2[0:j] 的最长公共子序列
         """
         if not text1 or not text2:
-            return
+            return 0  # 如果有一个字符串为空，则直接返回0，因为没有公共子序列
+
         m, n = len(text1), len(text2)
         # 初始化DP方程
         dp = [['' for i in range(n+1)] for j in range(m+1)]
+
+        # 动态规划填表
         for i in range(1, m+1):
             for j in range(1, n+1):
                 if text1[i-1] == text2[j-1]:
-                    # 如果相等，则选一个就可以
+                    # 如果text1的第i个字符和text2的第j个字符相等
                     dp[i][j] = dp[i-1][j-1] + text1[i-1]
                 else:
-                    # 如果不相等，则选择选j或者选i的最大值
+                    # 如果text1的第i个字符和text2的第j个字符不相等，选择dp[i-1][j]或dp[i][j-1]中的较长子序列
                     tmp1 = dp[i-1][j]
                     tmp2 = dp[i][j-1]
                     dp[i][j] = tmp1 if len(tmp1) > len(tmp2) else tmp2
+
+        # 结果处理
         if dp[m][n] == '':
-            return 0, -1
+            return 0, -1  # 如果最长公共子序列为空字符串，返回0和-1
         else:
-            return len(dp[m][n]), dp[m][n]
+            return len(dp[m][n]), dp[m][n]  # 返回最长公共子序列的长度和该子序列本身
+
 
 
 class Solution:

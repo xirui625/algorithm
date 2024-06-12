@@ -10,21 +10,33 @@
 # from itertools import combinations
 
 # -*- coding:utf-8 -*-
-from itertools import combinations, permutations
 
 class Solution:
     def Permutation(self, ss):
+        # 计算字符串的长度
         length = len(ss)
+        # 如果字符串长度小于等于1，直接返回该字符串
         if length <= 1:
             return ss
+        
+        # 初始化一个空列表，用来存放全排列结果
         ret = []
+        
+        # 遍历字符串
         for i in range(length):
+            # 取出第一个字符
             firstStr = ss[i]
-            for item in self.Permutation(ss[:i]+ss[i+1:]):
+            # 递归求剩余字符的全排列
+            for item in self.Permutation(ss[:i] + ss[i+1:]):
+                # 拼接字符串
                 tmp = firstStr + item
+                # 判断拼接结果是否已经存在于结果列表中，如果不存在，则加入结果列表
                 if tmp not in ret:
                     ret.append(tmp)
+        
+        # 返回全排列结果列表
         return ret
+
         # write code here
 
 if __name__ == '__main__':

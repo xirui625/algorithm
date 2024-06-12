@@ -29,13 +29,14 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
-        i, j, res = 0, len(height) - 1, 0
-        while i < j:
-            if height[i] < height[j]:
-                res = max(res, height[i] * (j - i))
-                i += 1
-            else:
-                res = max(res, height[j] * (j - i))
-                j -= 1
-        return res
+        i, j, res = 0, len(height) - 1, 0  # 初始化左右指针和结果变量
+        while i < j:  # 当左指针小于右指针时循环
+            if height[i] < height[j]:  # 如果左指针指向的高度小于右指针指向的高度
+                res = max(res, height[i] * (j - i))  # 更新结果为当前最大面积
+                i += 1  # 左指针右移
+            else:  # 如果左指针指向的高度大于等于右指针指向的高度
+                res = max(res, height[j] * (j - i))  # 更新结果为当前最大面积
+                j -= 1  # 右指针左移
+        return res  # 返回最大面积
+
 

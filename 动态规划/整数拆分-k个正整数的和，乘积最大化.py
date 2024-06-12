@@ -47,18 +47,20 @@ def integer_break(n: int) -> int:
     if n == 3:
         return 2
     
-    # 初始化 dp 数组
+    # 初始化 dp 数组，dp[i] 表示将整数 i 分解后的最大乘积
     dp = [0] * (n + 1)
-    dp[1] = 1
-    dp[2] = 2
-    dp[3] = 3
+    dp[1] = 1  # dp[1] = 1
+    dp[2] = 2  # dp[2] = 2
+    dp[3] = 3  # dp[3] = 3
 
     # 动态规划计算每个整数的最大乘积
     for i in range(4, n + 1):
         for j in range(1, i // 2 + 1):
+            # dp[i] 取最大值，即将 i 分解为 j 和 i-j 的乘积的最大值
             dp[i] = max(dp[i], dp[j] * dp[i - j])
     
     return dp[n]
+
 
 # 测试用例
 print(integer_break(2))  # 输出: 1

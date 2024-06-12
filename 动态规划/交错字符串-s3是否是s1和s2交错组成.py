@@ -20,28 +20,28 @@ t = t1 + t2 + ... + tm
 
 
 '''
-# def isInterleave(self, s1: str, s2: str, s3: str) -> bool:: 这是一个方法的定义，它接受三个参数s1、s2和s3，它们都是字符串类型，并返回一个布尔值表示s3是否由s1和s2交错组成。
-# if len(s1) + len(s2) != len(s3): return False: 这行代码首先检查s1和s2的长度之和是否等于s3的长度，如果不等，则返回False，因为无法通过交错s1和s2的字符得到s3。
-# length2 = len(s2): 这一行计算s2的长度，以后会频繁用到。
-# dps = [True] + [s2[:i] == s3[:i] for i in range(1, length2 + 1)]: 这一行初始化了一个动态规划数组dps，
-# 用于存储当前交错位置是否满足条件。它的长度为s2的长度加1，初始值为True，
-# 表示空字符串与s3的前缀是否相同。接着通过列表解析式判断s2的前缀是否与s3的对应前缀相同。
-# for index1, char1 in enumerate(s1):: 这是一个循环，遍历s1中的每个字符及其索引。
-# dps[0] = dps[0] and s3[index1] == char1: 这行代码更新了dps[0]，判断当前位置s1的字符是否与s3的对应位置字符相同。
-# for index2, char2 in enumerate(s2):: 这是一个嵌套的循环，遍历s2中的每个字符及其索引。
-# index3 = index1 + index2 + 1: 这行代码计算了s3中当前交错位置的索引。
-# dps[index2 + 1] = (char1 == s3[index3] and dps[index2 + 1]) or (char2 == s3[index3] and dps[index2]): 这行代码更新了dps[index2 + 1]，判断当前位置s1和s2的字符是否与s3的对应位置字符相同，以及前一个位置的结果是否满足条件。
-# return dps[-1]: 最后，返回dps数组的最后一个元素，表示整个字符串s3是否由s1和s2交错组成。
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-        if len(s1) + len(s2) != len(s3): return False
+        # 如果 s1 和 s2 的长度之和不等于 s3 的长度，则直接返回 False
+        if len(s1) + len(s2) != len(s3):
+            return False
+        
         length2 = len(s2)
+        # 初始化动态规划数组，dps[i] 表示 s1 和 s2 的前缀能否组成 s3 的前 i 个字符
         dps = [True] + [s2[:i] == s3[:i] for i in range(1, length2 + 1)]
+        
+        # 遍历 s1 的每个字符
         for index1, char1 in enumerate(s1):
+            # 更新 dps[0]，即前缀 "" 能否组成 s3 的前 index1 个字符
             dps[0] = dps[0] and s3[index1] == char1
+            # 遍历 s2 的每个字符
             for index2, char2 in enumerate(s2):
                 index3 = index1 + index2 + 1
+                # 更新 dps[index2 + 1]，即 s2 的前缀能否与 s1 的前 index1 个字符组成 s3 的前 index3 个字符
                 dps[index2 + 1] = (char1 == s3[index3] and dps[index2 + 1]) or (char2 == s3[index3] and dps[index2])
+        
+        # 返回 dps[-1]，即 s1 和 s2 能否组成 s3
         return dps[-1]
+
 
 

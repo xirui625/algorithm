@@ -36,15 +36,18 @@
 
 
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:       
-        n=len(s)
-        dp=[False]*(n+1)
-        dp[0]=True
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        dp = [False] * (n + 1)  # 初始化dp数组，dp[i]表示s的前i个字符是否可以拆分为wordDict中的单词
+        dp[0] = True  # 空字符串可以被拆分
+
         for i in range(n):
-            for j in range(i+1,n+1):
-                if(dp[i] and (s[i:j] in wordDict)):
-                    dp[j]=True
-        return dp[-1]
+            for j in range(i + 1, n + 1):
+                if dp[i] and (s[i:j] in wordDict):
+                    dp[j] = True  # 更新dp数组，如果s[i:j]在wordDict中，并且dp[i]为True，则dp[j]也为True
+
+        return dp[-1]  # 返回dp数组的最后一个元素，表示整个字符串s是否可以拆分成wordDict中的单词
+
 
 
 

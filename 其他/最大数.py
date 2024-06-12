@@ -15,13 +15,21 @@ from functools import cmp_to_key
 
 class Solution:
     def helper(self, num1, num2):
-        # 将两个数字转化为字符串，并比较拼接后的大小
+        # 定义比较函数，将两个数字转化为字符串，并比较拼接后的大小
+        # 如果 int(str(num1) + str(num2)) 大于 int(str(num2) + str(num1))，则返回 -1。
+        # 这意味着 num1 应该排在 num2 的前面。
+        # 否则返回 1，表示 num2 应该排在 num1 的前面。
         if int(str(num1) + str(num2)) > int(str(num2) + str(num1)):
             return -1
         else:
             return 1
 
-    def largestNumber(self, nums: List[int]) -> str:
+    def largestNumber(self, nums) -> str:
+        # 使用 functools.cmp_to_key 将比较函数转换为一个 key 函数，用于排序
         nums.sort(key=cmp_to_key(self.helper))
+        
+        # 将排序后的数组转化为字符串
         ret = ''.join(map(str, nums))
+        
+        # 如果结果的第一个字符是 '0'，则返回 '0'
         return '0' if ret[0] == '0' else ret

@@ -10,7 +10,7 @@
 #
 # 给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额。
 
-class Solution(object):
+class Solution:
     def rob(self, nums):
         """
         :type nums: List[int]
@@ -20,10 +20,13 @@ class Solution(object):
             return 0
         if len(nums) == 1:
             return nums[0]
+        
+        # 定义一个辅助函数，用来计算偷窃房屋的最大金额
         def helper(nums):
             pre = cur = 0
             for num in nums:
                 cur, pre = max(pre + num, cur), cur
             return cur
+        
         # 不偷第一个房子，不偷最后一个房子
         return max(helper(nums[1:]), helper(nums[:-1]))

@@ -32,6 +32,7 @@ class Solution:
         # 初始化行数和列数
         rows, cols = len(matrix), len(matrix[0])
         # 创建 dp 数组并初始化为 0
+        #dp[i][j] 表示以 matrix[i][j] 为右下角的最大正方形的边长
         dp = [[0] * cols for _ in range(rows)]
         max_side = 0  # 最大正方形的边长
 

@@ -47,11 +47,20 @@
 
 class Solution:
     def nthUglyNumber(self, n: int) -> int:
-        res, a, b, c = [1] * n, 0, 0, 0
+        res = [1] * n  # 创建一个长度为 n 的数组，用于存储丑数序列
+        a = b = c = 0    # 用于记录下一个乘以2、3、5的数的索引位置
+
         for i in range(1, n):
+            # 计算下一个丑数
             n2, n3, n5 = res[a] * 2, res[b] * 3, res[c] * 5
-            res[i] = min(n2, n3, n5)
-            if res[i] == n2: a += 1
-            if res[i] == n3: b += 1
-            if res[i] == n5: c += 1
-        return res[-1]
+            res[i] = min(n2, n3, n5)  # 取最小值作为下一个丑数
+
+            # 更新乘以2、3、5的数的索引位置
+            if res[i] == n2:
+                a += 1
+            if res[i] == n3:
+                b += 1
+            if res[i] == n5:
+                c += 1
+
+        return res[-1]  # 返回第 n 个丑数
