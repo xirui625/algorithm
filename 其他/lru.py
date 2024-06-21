@@ -43,4 +43,68 @@ class LRUCache:
     def _replace(self):
         del self._cache[self._access.pop(0)]
         
-        
+
+
+class ListNode:
+    def __init__(self, key=None, value=None):
+        self.key = key        # 节点的键
+        self.value = value    # 节点的值
+        self.prev = None     # 指向前一个节点的指针
+        self.next = None     # 指向后一个节点的指针
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity   # 缓存容量
+        self.cache = {}            # 哈希表，用于快速访问节点
+        self.head = ListNode()     # 虚拟头节点
+        self.tail = ListNode()     # 虚拟尾节点
+        self.head.next = self.tail # 初始化链表的头尾关系
+        self.tail.prev = self.head
+
+    def _add_node(self, node):
+        # 添加节点到链表头部
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+
+    def _remove_node(self, node):
+        # 从链表中移除指定节点
+        prev = node.prev
+        new = node.next
+        prev.next = new
+        new.prev = prev
+
+    def _move_to_head(self, node):
+        # 将节点移动到链表头部，表示最近访问
+        self._remove_node(node)
+        self._add_node(node)
+
+    def _pop_tail(self):
+        # 弹出链表尾部节点
+        res = self.tail.prev
+        self._remove_node(res)
+        return res
+
+    def get(self, key: int) -> int:
+        node = self.cache.get(key, None)
+        if not node:
+            return -1
+        self._move_to_head(node)   # 将访问的节点移动到链表头部，表示最近使用
+        return node.value          # 返回节点的值
+
+    def put(self, key: int, value: int) -> None:
+        node = self.cache.get(key, None)
+        if not node:
+            # 如果缓存中不存在该节点，则创建新节点并加入到链表头部
+            newNode = ListNode(key, value)
+            self.cache[key] = newNode
+            self._add_node(newNode)
+            if len(self.cache) > self.capacity:
+                # 如果缓存超过容量，则移除链表尾部节点
+                tail = self._pop_tail()
+                del self.cache[tail.key]
+        else:
+            # 如果缓存中存在该节点，则更新节点的值，并将节点移动到链表头部
+            node.value = value
+            self._move_to_head(node)
