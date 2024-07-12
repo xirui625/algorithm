@@ -6,30 +6,60 @@
 # @Software: PyCharm
 
 class Solution:
-    def removeNthFromEnd(self, head, k):
-        if not head:
-            return None
-        
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        if not head or n < 1:
+            return head
         # 计算链表的长度
-        n = 0
         cur = head
+        length = 0
         while cur:
+            length += 1
             cur = cur.next
-            n += 1
-        
         # 特殊情况处理：如果要删除的是头节点
-        if n == k:
+        if length == n:
             return head.next
-        
-        # 找到要删除节点的前一个节点
         cur = head
-        for i in range(n - k - 1):
+        # 找到要删除节点的前一个节点
+        for i in range(length - n -1):
             cur = cur.next
-        
         # 删除节点
         cur.next = cur.next.next
-        
         return head
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    
+
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = dummy #快指针
+        slow = dummy # 慢指针
+        # 快指针先向前移 n+1步
+        for _ in range(n + 1):
+            fast = fast.next
+        # 同时移动快慢指针，知道快指针到达链表末尾
+        while fast is not None:
+            fast = fast.next
+            slow = slow.next
+        # 此时的慢指针指向的就是要删除结点的前一个结点
+        slow.next = slow.next.next
+        # 此时虚拟头结点的下一个结点就是链表的头结点
+        return dummy.next
 
 
 
